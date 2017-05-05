@@ -20,7 +20,7 @@ public class Spatial : MonoBehaviour {
         {
             Circle c = new Circle();
             c.m_pos = new Vector2(Random.Range(0, 1023), Random.Range(0, 1023));
-            c.m_radius = Random.Range(1, 49);
+            c.m_radius = Random.Range(1, 20);
             circles.Add(c);
         }
         Color32[] colours = new Color32[1024*1024];
@@ -30,13 +30,14 @@ public class Spatial : MonoBehaviour {
             for (int x = 0; x < 1024; ++x)
             {
                 float value = 0;
+                
                 for (int i = 0; i < circles.Count; ++i)
                 {
                     float d = (new Vector2((float)x, (float)y) - circles[i].m_pos).magnitude;
                     if (d < circles[i].m_radius)
                     {
                         value = value + (1.0f - d / circles[i].m_radius);
-                       value =  Mathf.Clamp(value, 0.0f, 1.0f);
+                        value = /* Mathf.Clamp(value, 0.9f, 1.0f);*/ 1.0f;
                     }
 
                 }
